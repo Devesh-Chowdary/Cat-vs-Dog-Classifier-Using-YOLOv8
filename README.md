@@ -96,6 +96,8 @@ results = model.predict(source="test1.jpg", save=True)
 Predicted images will be saved in a folder like:
 /content/runs/detect/predict/
 
+---
+
 ### **Step 6: Display the Result**
 Show the predicted output using PIL:
 ```python
@@ -103,6 +105,8 @@ from PIL import Image
 Image.open('/content/runs/detect/predict/test1.jpg')
 ```
 This will display the image with bounding boxes around detected cats and dogs.
+
+---
 
 ### **Sample Output**
 
