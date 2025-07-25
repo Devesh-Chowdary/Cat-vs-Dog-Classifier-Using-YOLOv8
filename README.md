@@ -65,13 +65,13 @@ Train the model from scratch using the YOLOv8 Nano weights:
 ```python
 from ultralytics import YOLO
 
-model = YOLO('yolov8n.pt')  # Load pre-trained YOLOv8 nano
+model = YOLO('yolov8n.pt')  
 
 model.train(
-    data="/content/cat_dog_data/data.yaml",  # Path to data config
-    epochs=30,          # Training epochs
-    imgsz=640,          # Image resolution
-    device=0            # GPU (device 0)
+    data="/content/cat_dog_data/data.yaml",  
+    epochs=30,          
+    imgsz=640,          
+    device=0            
 )
 ```
 After training, weights will be saved at:
@@ -83,14 +83,14 @@ After training, weights will be saved at:
 Upload any test image:
 ```python
 from google.colab import files
-uploaded = files.upload()  # Upload an image (e.g., test1.jpg)
+uploaded = files.upload()  # Upload an image
 ```
 Then run inference:
 ```python
 from ultralytics import YOLO
 
-model = YOLO("/content/runs/detect/train/weights/best.pt")  # Load trained model
-results = model.predict(source="test1.jpg", save=True)       # Run prediction
+model = YOLO("/content/runs/detect/train/weights/best.pt")  
+results = model.predict(source="test1.jpg", save=True)       
 ```
 
 Predicted images will be saved in a folder like:
