@@ -22,7 +22,90 @@ This project trains a **YOLOv8 object detection model** to classify and localize
 
 ## 🚀 Step-by-Step Instructions
 
-### ✅ Step 1: Install YOLOv8
+### **Step 1: Enable GPU in Google Colab**
+Before running the code:
+1. Go to **Runtime > Change runtime type**.
+2. Set **Hardware accelerator = GPU**.
+3. Save and restart the runtime.
+
+---
+
+### **Step 2: Install YOLOv8**
 Install the required YOLOv8 package from Ultralytics.
 ```python
 !pip install ultralytics
+```
+
+---
+
+### **Step 3: Upload and Extract Dataset**
+Upload the custom YOLO-formatted dataset zip and extract it:
+
+```python
+from google.colab import files
+uploaded = files.upload()   # Upload CAT VS DOG.v1i.yolov8.zip
+
+import zipfile
+with zipfile.ZipFile("CAT VS DOG.v1i.yolov8.zip", 'r') as zip_ref:
+    zip_ref.extractall("/content")
+!mv "/content/CAT VS DOG.v1i.yolov8" "/content/cat_dog_data"
+```
+
+Once extracted, your folder should look like:
+```python
+/content/cat_dog_data/
+├── images/
+├── labels/
+└── data.yaml
+```
+---
+
+### **Step 4: Train the YOLOv8 Model on GPU**
+Train the model from scratch using the YOLOv8 Nano weights:
+```python
+from ultralytics import YOLO
+
+model = YOLO('yolov8n.pt')  # Load pre-trained YOLOv8 nano
+
+model.train(
+    data="/content/cat_dog_data/data.yaml",  # Path to data config
+    epochs=30,          # Training epochs
+    imgsz=640,          # Image resolution
+    device=0            # GPU (device 0)
+)
+```
+After training, weights will be saved at:
+/content/runs/detect/train/weights/best.pt
+
+---
+
+### **Step 5: Test the Model on a New Image**
+Upload any test image:
+```python
+from google.colab import files
+uploaded = files.upload()  # Upload an image (e.g., test1.jpg)
+```
+Then run inference:
+```python
+from ultralytics import YOLO
+
+model = YOLO("/content/runs/detect/train/weights/best.pt")  # Load trained model
+results = model.predict(source="test1.jpg", save=True)       # Run prediction
+```
+
+Predicted images will be saved in a folder like:
+/content/runs/detect/predict/
+
+### **Step 6: Display the Result**
+Show the predicted output using PIL:
+```python
+from PIL import Image
+Image.open('/content/runs/detect/predict/test1.jpg')
+```
+This will display the image with bounding boxes around detected cats and dogs.
+
+### **Sample Output**
+
+
+
+
