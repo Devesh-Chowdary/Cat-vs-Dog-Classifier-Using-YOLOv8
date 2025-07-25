@@ -1,6 +1,5 @@
-# Cat-vs-Dog-Classifier-Using-YOLOv8
+# Cat 🐱 -vs-Dog 🐶 -Classifier-Using-YOLOv8
 
-# 🐱🐶 YOLOv8 Cat vs Dog Classifier
 
 This project trains a **YOLOv8 object detection model** to classify and localize **cats and dogs** in images. It is designed to run entirely on **Google Colab with GPU support** using the [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) framework.
 
