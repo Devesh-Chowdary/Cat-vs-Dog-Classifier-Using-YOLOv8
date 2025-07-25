@@ -1,3 +1,4 @@
+```python
 !pip install ultralytics
 
 from google.colab import files
@@ -33,3 +34,4 @@ os.listdir('/content/runs/detect/predict3')
 
 from PIL import Image
 Image.open('/content/runs/detect/predict3/test4.jpg')
+```
